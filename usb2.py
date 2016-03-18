@@ -9,10 +9,13 @@ import argparse
 import sys
 import usb
 
-busses = usb.busses()
-for bus in busses:
-    devices = bus.devices
-    for dev in devices:
+
+def main():
+
+    busses = usb.busses()
+    for bus in busses:
+        devices = bus.devices
+        for dev in devices:
 	    handle = dev.open()
 	    print("Device:", dev.filename)
 	    print("  VID: 0x{:04x}".format(dev.idVendor))
@@ -33,3 +36,7 @@ for bus in busses:
                 print('')
             else:
                 print(" --> '{}'".format(handle.getString(dev.iSerialNumber, 255)))
+
+
+if __name__ == '__main__':
+  main()
